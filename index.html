@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Continhas da Gabi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========================================================= -->
+  <!-- TELA 1: ENTRADA / BOAS-VINDAS                             -->
+  <!-- ========================================================= -->
+  <section id="tela-entrada" class="tela ativa">
+    <h1>Continhas da Gabi</h1>
+    <img id="imagem-entrada" src="imagens/entradas.png" alt="Continhas da Gabi">
+    <p class="subtitulo">Vamos brincar de matemática?</p>
+    <button class="btn-comecar" data-destino="tela-selecao">Começar</button>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- TELA 2: SELEÇÃO — escolher o que treinar                  -->
+  <!-- ========================================================= -->
+  <section id="tela-selecao" class="tela">
+    <button class="voltar" data-destino="tela-entrada">← Voltar</button>
+    <p class="subtitulo">O que vamos treinar hoje?</p>
+
+    <div class="menu-operacoes">
+      <button class="op-card" data-op="somar">
+        <img class="op-img" src="imagens/soma.png" alt="Somar">
+        <span class="op-nome">Somar</span>
+      </button>
+
+      <button class="op-card" data-op="subtrair">
+        <img class="op-img" src="imagens/subtracao.png" alt="Subtrair">
+        <span class="op-nome">Subtrair</span>
+      </button>
+
+      <button class="op-card" data-op="multiplicar">
+        <img class="op-img" src="imagens/multiplicacao.png" alt="Multiplicar">
+        <span class="op-nome">Multiplicar</span>
+      </button>
+
+      <button class="op-card" data-op="dividir">
+        <img class="op-img" src="imagens/divisao.png" alt="Dividir">
+        <span class="op-nome">Dividir</span>
+      </button>
+    </div>
+
+    <button class="op-card misturado" data-op="misturado">
+      <img class="op-img" src="imagens/todas.png" alt="Misturado">
+      <span class="op-nome">Misturado</span>
+    </button>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- TELA 3: JOGO                                               -->
+  <!-- ========================================================= -->
+  <section id="tela-jogo" class="tela">
+
+    <div id="barra-progresso">
+      <div id="barra-preenchimento"></div>
+      <span id="barra-rotulo">0/10</span>
+    </div>
+
+    <div id="area-jogo">
+      <button class="voltar" data-destino="tela-selecao">← Voltar</button>
+      <p class="placar">⭐ <span id="contador-estrelas">0</span></p>
+      <div id="cena-objetos"></div>
+      <p id="pergunta"></p>
+      <div id="opcoes-resposta"></div>
+      <p id="feedback"></p>
+    </div>
+
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- TELA 4: PREMIAÇÃO                                          -->
+  <!-- ========================================================= -->
+  <section id="tela-premiacao" class="tela">
+    <h1>🏆 Você ganhou! 🏆</h1>
+    <p class="subtitulo">Parabéns, Gabi! Sua recompensa é:</p>
+
+    <img id="img-premio" src="" alt="Recompensa">
+    <p id="texto-premio" class="texto-premio"></p>
+
+    <button id="btn-continuar-jogando">Jogar mais!</button>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- MODAL DE PARABÉNS (a cada acerto individual)             -->
+  <!-- ========================================================= -->
+  <div id="modal-parabens" class="modal">
+    <div class="modal-conteudo">
+      <h2>🎉 Acertou! 🎉</h2>
+      <p id="texto-parabens">Muito bem, Gabi!</p>
+      <button id="btn-proxima">Próxima continha</button>
+    </div>
+  </div>
+
+  <div id="confete"></div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

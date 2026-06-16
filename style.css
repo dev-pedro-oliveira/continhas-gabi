@@ -1,0 +1,486 @@
+/* ========================================================= */
+/* BLOCO 1: RESET e VARIÁVEIS                                 */
+/* ========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-fundo: #fff7e6;
+  --cor-primaria: #ff8fab;
+  --cor-secundaria: #8ecae6;
+  --cor-sucesso: #95d5b2;
+  --cor-texto: #5a4a42;
+  --cor-destaque: #ff7b00;
+
+  --cor-soma: #95d5b2;
+  --cor-sub:  #8ecae6;
+  --cor-mult: #ff8fab;
+  --cor-div:  #ffb703;
+  --cor-mist: #b298dc;
+
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --arredondado: 20px;
+}
+
+/* ========================================================= */
+/* BLOCO 2: CORPO e FUNDO                                     */
+/* ========================================================= */
+
+body {
+  font-family: 'Baloo 2', 'Comic Sans MS', sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  min-height: 100dvh;
+  padding: 16px;
+}
+
+/* ========================================================= */
+/* BLOCO 3: SISTEMA DE TELAS                                  */
+/* ========================================================= */
+
+.tela {
+  display: none;
+}
+
+.tela.ativa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fade-in 0.4s ease;
+}
+
+#tela-entrada.ativa,
+#tela-selecao.ativa,
+#tela-premiacao.ativa {
+  min-height: 88dvh;
+  justify-content: center;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================================= */
+/* BLOCO 4: TÍTULOS e SUBTÍTULOS                             */
+/* ========================================================= */
+
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+
+.subtitulo {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+/* ========================================================= */
+/* BLOCO 5: TELA DE ENTRADA                                   */
+/* ========================================================= */
+
+#imagem-entrada {
+  display: block;
+  width: auto;
+  max-width: 80%;
+  max-height: 38vh;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.btn-comecar {
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: white;
+  background-color: var(--cor-primaria);
+  border: none;
+  border-radius: var(--arredondado);
+  padding: 18px 48px;
+  cursor: pointer;
+  box-shadow: var(--sombra);
+  transition: transform 0.2s;
+  min-height: 64px;
+}
+
+.btn-comecar:hover {
+  transform: scale(1.05);
+}
+
+/* ========================================================= */
+/* BLOCO 6: TELA DE SELEÇÃO (cartões de operação)           */
+/* ========================================================= */
+
+.menu-operacoes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.op-card {
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  border: none;
+  border-radius: var(--arredondado);
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--sombra);
+  transition: transform 0.2s;
+  min-height: 110px;
+}
+
+.op-card:hover {
+  transform: scale(1.05);
+}
+
+.op-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.op-card[data-op="somar"]       { background-color: var(--cor-soma); }
+.op-card[data-op="subtrair"]    { background-color: var(--cor-sub); }
+.op-card[data-op="multiplicar"] { background-color: var(--cor-mult); }
+.op-card[data-op="dividir"]     { background-color: var(--cor-div); }
+
+.misturado {
+  background-color: var(--cor-mist);
+  width: 100%;
+  max-width: 320px;
+  flex-direction: row;
+  gap: 12px;
+  min-height: 80px;
+}
+
+/* ========================================================= */
+/* BLOCO 7: TELA DE JOGO                                     */
+/* ========================================================= */
+
+.placar {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 8px 0 16px;
+}
+
+#cena-objetos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  min-height: 90px;
+}
+
+.grupo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  max-width: 240px;
+  padding: 12px;
+  background-color: white;
+  border-radius: var(--arredondado);
+  box-shadow: var(--sombra);
+}
+
+.objeto {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.objeto.removido {
+  opacity: 0.2;
+  filter: grayscale(100%);
+}
+
+.operador {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--cor-texto);
+}
+
+#pergunta {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#opcoes-resposta {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.btn-resposta {
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--cor-texto);
+  background-color: white;
+  border: 4px solid var(--cor-secundaria);
+  border-radius: var(--arredondado);
+  cursor: pointer;
+  box-shadow: var(--sombra);
+  transition: transform 0.2s;
+  min-width: 90px;
+  min-height: 90px;
+}
+
+.btn-resposta:hover {
+  transform: scale(1.05);
+}
+
+#feedback {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+  min-height: 32px;
+}
+
+/* ========================================================= */
+/* BLOCO 7.5: LAYOUT JOGO + BARRA DE PROGRESSO À DIREITA     */
+/* ========================================================= */
+
+#tela-jogo.ativa {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  gap: 16px;
+}
+
+#area-jogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+/* A CASCA agora carrega o degradê fixo, ocupando a altura TOTAL
+   da barra: vermelho na base, amarelo no meio, verde no topo.
+   Assim a cor de cada altura é sempre a mesma, independente do
+   quanto está preenchido. */
+#barra-progresso {
+  position: relative;
+  width: 56px;
+  flex-shrink: 0;
+  border: 4px solid var(--cor-secundaria);
+  border-radius: 40px;
+  overflow: hidden;
+  min-height: 320px;
+  background: linear-gradient(to top, #e63946 0%, #ffd166 50%, #2a9d8f 100%);
+}
+
+/* O PREENCHIMENTO agora é uma "cortina" branca que cobre o
+   degradê DE CIMA PARA BAIXO. A 'altura' dele é a parte ainda
+   NÃO conquistada. O JS controla esse valor (100% = barra vazia,
+   0% = barra cheia). Como fica no topo, ao diminuir vai
+   "descortinando" as cores de baixo para cima, na ordem certa. */
+#barra-preenchimento {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;  /* começa cobrindo tudo (barra vazia); o JS reduz */
+  background-color: white;
+  transition: height 0.5s ease;
+}
+
+#barra-rotulo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--cor-texto);
+  white-space: nowrap;
+  z-index: 1; /* fica acima da cortina, sempre legível */
+}
+
+/* ========================================================= */
+/* BLOCO 8: BOTÃO VOLTAR                                     */
+/* ========================================================= */
+
+.voltar {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.1rem;
+  color: var(--cor-texto);
+  cursor: pointer;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+/* ========================================================= */
+/* BLOCO 9: MODAL DE PARABÉNS                                */
+/* ========================================================= */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modal.ativo {
+  display: flex;
+  animation: fade-in 0.4s ease;
+}
+
+.modal-conteudo {
+  background-color: white;
+  padding: 32px;
+  border-radius: var(--arredondado);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: var(--sombra);
+}
+
+.modal-conteudo h2 {
+  margin-bottom: 16px;
+}
+
+#texto-parabens {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+#btn-proxima {
+  margin-top: 16px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--arredondado);
+  font-family: inherit;
+  background-color: var(--cor-sucesso);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ========================================================= */
+/* BLOCO 9.5: TELA DE PREMIAÇÃO                              */
+/* ========================================================= */
+
+#img-premio {
+  display: block;
+  width: auto;
+  max-width: 70%;
+  max-height: 40vh;
+  object-fit: contain;
+  margin: 12px auto;
+  border-radius: var(--arredondado);
+}
+
+.texto-premio {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--cor-primaria);
+  text-align: center;
+  margin: 12px 0 24px;
+}
+
+#btn-continuar-jogando {
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: white;
+  background-color: var(--cor-sucesso);
+  border: none;
+  border-radius: var(--arredondado);
+  padding: 16px 40px;
+  cursor: pointer;
+  box-shadow: var(--sombra);
+  min-height: 60px;
+}
+
+/* ========================================================= */
+/* BLOCO 10: CONFETE                                         */
+/* ========================================================= */
+
+#confete {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.confete-pedaco {
+  position: absolute;
+  top: -20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  animation-name: cair;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes cair {
+  to { transform: translateY(105vh) rotate(720deg); }
+}
+
+/* ========================================================= */
+/* BLOCO 11: RESPONSIVO — TELA LARGA (TABLET DEITADO)        */
+/* ========================================================= */
+
+@media (min-width: 720px) {
+  .menu-operacoes {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .op-img { width: 84px; height: 84px; }
+
+  .objeto    { font-size: 2.6rem; }
+  .operador  { font-size: 3rem; }
+  #pergunta  { font-size: 2.6rem; }
+
+  .btn-resposta {
+    font-size: 2.4rem;
+    min-width: 120px;
+    min-height: 120px;
+  }
+
+  h1 { font-size: 2.8rem; }
+
+  #barra-progresso {
+    width: 72px;
+    min-height: 420px;
+  }
+  #barra-rotulo { font-size: 1.3rem; }
+}
