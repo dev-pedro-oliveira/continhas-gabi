@@ -14,7 +14,6 @@ const cenaObjetos      = document.getElementById("cena-objetos");
 const pergunta         = document.getElementById("pergunta");
 const opcoesResposta   = document.getElementById("opcoes-resposta");
 const feedback         = document.getElementById("feedback");
-const contadorEstrelas = document.getElementById("contador-estrelas");
 
 const barraPreench     = document.getElementById("barra-preenchimento");
 const barraRotulo      = document.getElementById("barra-rotulo");
@@ -45,7 +44,6 @@ const recompensas = [
    --------------------------------------------------------- */
 let modoAtual = "somar";
 let problemaAtual = null;
-let estrelas = 0;
 let acertosNaBarra = 0;
 
 const EMOJIS = ["🍎","🍓","⭐","🎈","🐱","🐶","🍪","🌸","🚗","🐟"];
@@ -121,9 +119,7 @@ opCards.forEach(function (card) {
   card.addEventListener("click", function () {
     tocarSom("selecao");
     modoAtual = card.dataset.op;
-    estrelas = 0;
     acertosNaBarra = 0;
-    atualizarPlacar();
     atualizarBarra();
     mostrarTela("tela-jogo");
     novaContinha();
@@ -256,9 +252,7 @@ function renderOpcoes(prob) {
    --------------------------------------------------------- */
 function responder(valor, botao) {
   if (valor === problemaAtual.resposta) {
-    estrelas++;
     acertosNaBarra++;
-    atualizarPlacar();
     atualizarBarra();
     feedback.textContent = "Acertou! 🎉";
     feedback.style.color = "var(--cor-sucesso)";
@@ -282,10 +276,7 @@ function responder(valor, botao) {
 /* ---------------------------------------------------------
    BLOCO 10.5: ATUALIZAR A BARRA DE PROGRESSO
    O preenchimento é uma "cortina" que cobre o degradê de cima.
-   Sua altura é a parte AINDA NÃO conquistada. Por isso usamos
-   (meta - acertos): com 0 acertos a cortina cobre 100% (barra
-   vazia); a cada acerto ela encolhe, descobrindo as cores de
-   baixo para cima.
+   (meta - acertos) = parte ainda não conquistada.
    --------------------------------------------------------- */
 function atualizarBarra() {
   const restante = ((META_ACERTOS - acertosNaBarra) / META_ACERTOS) * 100;
@@ -333,13 +324,6 @@ btnProxima.addEventListener("click", function () {
   confeteContainer.innerHTML = "";
   novaContinha();
 });
-
-/* ---------------------------------------------------------
-   BLOCO 12: PLACAR
-   --------------------------------------------------------- */
-function atualizarPlacar() {
-  contadorEstrelas.textContent = estrelas;
-}
 
 /* ---------------------------------------------------------
    BLOCO 13: CONFETE

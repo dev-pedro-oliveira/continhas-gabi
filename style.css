@@ -175,18 +175,15 @@ h1 {
 /* BLOCO 7: TELA DE JOGO                                     */
 /* ========================================================= */
 
-.placar {
-  font-size: 1.6rem;
-  font-weight: 800;
-  margin: 8px 0 16px;
-}
-
+/* A cena empilha VERTICALMENTE por padrão (bom para o celular):
+   grupo em cima, operador centralizado, grupo embaixo. No tablet
+   ela volta a ficar lado a lado (ver media query no Bloco 11). */
 #cena-objetos {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 20px;
   min-height: 90px;
 }
@@ -279,10 +276,6 @@ h1 {
   flex: 1;
 }
 
-/* A CASCA agora carrega o degradê fixo, ocupando a altura TOTAL
-   da barra: vermelho na base, amarelo no meio, verde no topo.
-   Assim a cor de cada altura é sempre a mesma, independente do
-   quanto está preenchido. */
 #barra-progresso {
   position: relative;
   width: 56px;
@@ -294,17 +287,12 @@ h1 {
   background: linear-gradient(to top, #e63946 0%, #ffd166 50%, #2a9d8f 100%);
 }
 
-/* O PREENCHIMENTO agora é uma "cortina" branca que cobre o
-   degradê DE CIMA PARA BAIXO. A 'altura' dele é a parte ainda
-   NÃO conquistada. O JS controla esse valor (100% = barra vazia,
-   0% = barra cheia). Como fica no topo, ao diminuir vai
-   "descortinando" as cores de baixo para cima, na ordem certa. */
 #barra-preenchimento {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;  /* começa cobrindo tudo (barra vazia); o JS reduz */
+  height: 100%;
   background-color: white;
   transition: height 0.5s ease;
 }
@@ -318,7 +306,7 @@ h1 {
   font-size: 1.1rem;
   color: var(--cor-texto);
   white-space: nowrap;
-  z-index: 1; /* fica acima da cortina, sempre legível */
+  z-index: 1;
 }
 
 /* ========================================================= */
@@ -465,6 +453,14 @@ h1 {
   }
 
   .op-img { width: 84px; height: 84px; }
+
+  /* No tablet há largura de sobra: a cena volta a ficar
+     LADO A LADO (grupo + operador + grupo na horizontal). */
+  #cena-objetos {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
 
   .objeto    { font-size: 2.6rem; }
   .operador  { font-size: 3rem; }
